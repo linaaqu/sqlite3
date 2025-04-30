@@ -2,7 +2,6 @@ import sqlite3
 from tkinter import *
 from tkinter import ttk, messagebox
 
-# Настройка БД
 conn = sqlite3.connect('notes.db')
 cursor = conn.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS notes
@@ -10,7 +9,6 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS notes
 
 PRIORITY = {0: "Нет", 1: "Низкий", 2: "Средний", 3: "Высокий"}
 
-# Основные функции
 def show_notes():
     tree.delete(*tree.get_children())
     cursor.execute("SELECT * FROM notes ORDER BY priority DESC")
@@ -52,7 +50,6 @@ def on_select(event):
         note_entry.insert(0, item['values'][1])
         priority.set([k for k,v in PRIORITY.items() if v == item['values'][2]][0])
 
-# Интерфейс
 root = Tk()
 root.title("Заметки с приоритетами")
 
